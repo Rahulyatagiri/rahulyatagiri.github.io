@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Yatagiri | Data Science & Investment Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fafaf8;
+            --bg-secondary: #f5f4f0;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #8a8a8a;
+            --accent: #1e3a5f;
+            --accent-light: #2d5a8a;
+            --gold: #b8860b;
+            --gold-light: #d4a84b;
+            --border: #e8e6e1;
+            --border-dark: #d4d2cc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(250, 250, 248, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem 6rem;
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-dark);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        .hero-decorative {
+            position: absolute;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.04;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25rem;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin-top: 1.5rem;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about-text {
+            max-width: 520px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-text p:first-of-type::first-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.75rem;
+            margin-top: 0.1rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .credentials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .credential-item {
+            padding: 1.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .credential-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .credential-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 4rem;
+        }
+
+        .experience-nav {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .experience-nav-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .experience-nav-item:hover,
+        .experience-nav-item.active {
+            border-color: var(--accent);
+        }
+
+        .experience-nav-item.active .exp-nav-company {
+            color: var(--accent);
+        }
+
+        .exp-nav-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        .exp-nav-company {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .experience-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .experience-item {
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .exp-role {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-company {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .exp-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-align: right;
+        }
+
+        .exp-location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .exp-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .exp-bullets li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+
+        .exp-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .exp-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .highlight-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.4rem 0.75rem;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            letter-spacing: 0.05em;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--bg-secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .project-card:hover::before {
+            height: 100%;
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+        }
+
+        .project-type {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-card.featured .project-title {
+            font-size: 2rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .metric {
+            text-align: left;
+        }
+
+        .metric-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.35rem 0.6rem;
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .skill-category h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.6rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Certifications */
+        .certifications {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .cert-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cert-item {
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .education-card {
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--border-dark);
+        }
+
+        .edu-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .edu-degree {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-school {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-location {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .edu-details {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            padding: 8rem 4rem;
+        }
+
+        .contact .section-eyebrow {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .contact .section-title {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.75rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 4rem;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-nav {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card.featured {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .hero-decorative {
+                display: none;
+            }
+
+            .credentials {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact {
+                padding: 5rem 1.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">Rahul Yatagiri</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-decorative">RY</div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Data Science & FinTech</p>
+            <h1 class="hero-title">Transforming data into <em>strategic insight</em></h1>
+            <p class="hero-subtitle">Data science and business analysis professional bridging technology and finance. Skilled in extracting complex datasets to identify patterns, drive revenue forecasting, and deliver actionable insights that enhance growth and profitability.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                <a href="#projects" class="btn btn-secondary">View Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-grid">
+            <div class="about-text">
+                <div class="section-header">
+                    <p class="section-eyebrow">About</p>
+                    <h2 class="section-title">Profile</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <p>Data science and business analysis professional with expertise in Python, Java, SQL, and advanced visualization tools. I specialize in extracting and analyzing complex datasets to identify customer behavior patterns and drive revenue forecasting.</p>
+                <p>My background spans options trading, software engineering, and data science—providing a unique perspective that bridges technology and business strategy. I've built driver-based financial models, deployed predictive algorithms, and created real-time monitoring dashboards.</p>
+                <p>Currently seeking opportunities in investment analysis, quantitative finance, or data-driven roles where I can apply my technical skills and financial expertise to generate actionable insights and drive portfolio performance.</p>
+            </div>
+            <div class="credentials">
+                <div class="credential-item fade-in">
+                    <p class="credential-label">Education</p>
+                    <p class="credential-value">M.S. Financial Technology</p>
+                </div>
+                <div class="credential-item fade-in">
+                    <p class="credential-label">Location</p>
+                    <p class="credential-value">Hartford, CT</p>
+                </div>
+                <div class="credential-item fade-in">
+                    <p class="credential-label">Focus</p>
+                    <p class="credential-value">Predictive Analytics</p>
+                </div>
+                <div class="credential-item fade-in">
+                    <p class="credential-label">Bloomberg</p>
+                    <p class="credential-value">Top 6.1% Global</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header">
+            <p class="section-eyebrow">Career</p>
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="experience-grid">
+            <div class="experience-nav">
+                <div class="experience-nav-item active">
+                    <p class="exp-nav-year">Jun 2025 — Present</p>
+                    <p class="exp-nav-company">Foodhost</p>
+                </div>
+                <div class="experience-nav-item">
+                    <p class="exp-nav-year">May 2024 — May 2025</p>
+                    <p class="exp-nav-company">Foodhost</p>
+                </div>
+                <div class="experience-nav-item">
+                    <p class="exp-nav-year">May 2022 — Jun 2023</p>
+                    <p class="exp-nav-company">Q2Q Solutions</p>
+                </div>
+                <div class="experience-nav-item">
+                    <p class="exp-nav-year">Mar 2018 — Apr 2022</p>
+                    <p class="exp-nav-company">AP Trading</p>
+                </div>
+            </div>
+            <div class="experience-content">
+                <div class="experience-item fade-in">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-role">Data Scientist</h3>
+                            <p class="exp-company">Foodhost</p>
+                            <p class="exp-location">Remote</p>
+                        </div>
+                        <p class="exp-date">Jun 2025 — Present</p>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Analyzed business insights and introduced algorithms that enhanced user personalization, resulting in increased order frequency and boosted user engagement</li>
+                        <li>Executed end-to-end development and deployment of predictive models, achieving a 20% improvement in forecasting accuracy and enhanced operational efficiency</li>
+                        <li>Performed comprehensive A/B testing using Python and SQL over a 2-month period to validate user engagement impacts and deliver actionable insights for marketing optimization</li>
+                    </ul>
+                    <div class="exp-highlights">
+                        <span class="highlight-tag">Predictive Modeling</span>
+                        <span class="highlight-tag">A/B Testing</span>
+                        <span class="highlight-tag">Python</span>
+                        <span class="highlight-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="experience-item fade-in">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-role">Data Analyst</h3>
+                            <p class="exp-company">Foodhost</p>
+                            <p class="exp-location">Hartford, CT</p>
+                        </div>
+                        <p class="exp-date">May 2024 — May 2025</p>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Built driver-based financial models in Excel and Python to analyze unit economics, subscription profitability, and incentive ROI directly supporting budget planning</li>
+                        <li>Created interactive Power BI dashboards for real-time monitoring of cash flow, GMV, and breakeven analysis, enabling leadership to proactively manage financial risks</li>
+                        <li>Automated expense tracking and revenue reporting processes achieving 80% workflow automation</li>
+                        <li>Consolidated revenue and cost data across multiple sources via SQL, resulting in 40% reduction in manual reconciliation</li>
+                    </ul>
+                    <div class="exp-highlights">
+                        <span class="highlight-tag">Financial Modeling</span>
+                        <span class="highlight-tag">Power BI</span>
+                        <span class="highlight-tag">Excel</span>
+                        <span class="highlight-tag">Forecasting</span>
+                    </div>
+                </div>
+                <div class="experience-item fade-in">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-role">Software Engineer</h3>
+                            <p class="exp-company">Q2Q Solutions</p>
+                            <p class="exp-location">Chennai, India</p>
+                        </div>
+                        <p class="exp-date">May 2022 — Jun 2023</p>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Developed automation scripts in Java to extract, parse, and validate system logs, streamlining QA workflows</li>
+                        <li>Designed and deployed a Linux-based automated test server, enabling overnight test execution and saving weeks during release phases</li>
+                        <li>Built internal tools for log processing and issue detection using Java and regular expressions</li>
+                    </ul>
+                    <div class="exp-highlights">
+                        <span class="highlight-tag">Java</span>
+                        <span class="highlight-tag">Linux</span>
+                        <span class="highlight-tag">Automation</span>
+                        <span class="highlight-tag">QA</span>
+                    </div>
+                </div>
+                <div class="experience-item fade-in">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-role">Options Trader</h3>
+                            <p class="exp-company">AP Trading</p>
+                            <p class="exp-location">Chennai, India</p>
+                        </div>
+                        <p class="exp-date">Mar 2018 — Apr 2022</p>
+                    </div>
+                    <ul class="exp-bullets">
+                        <li>Specialized in high-probability options strategies, focusing on risk-adjusted returns and improved portfolio stability</li>
+                        <li>Executed multi-leg trades including credit spreads and iron condors to optimize profitability</li>
+                        <li>Utilized technical analysis and volatility tracking to inform strategic positioning</li>
+                        <li>Enhanced risk management through data analysis, boosting trading performance by 15%</li>
+                    </ul>
+                    <div class="exp-highlights">
+                        <span class="highlight-tag">Options Trading</span>
+                        <span class="highlight-tag">Technical Analysis</span>
+                        <span class="highlight-tag">Risk Management</span>
+                        <span class="highlight-tag">Volatility</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <p class="section-eyebrow">Portfolio</p>
+            <h2 class="section-title">Projects & Competitions</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card featured fade-in">
+                <div>
+                    <p class="project-type">Trading Competition</p>
+                    <h3 class="project-title">Bloomberg Trading Challenge</h3>
+                    <p class="project-description">Represented the University of Connecticut competing against 2,007 teams from 309 universities across 38 countries. Using the Bloomberg Terminal, contributed to trading strategies, market analysis, and portfolio optimization, growing a $1 million virtual portfolio by 12.36% to $1,123,590 in six weeks.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Bloomberg Terminal</span>
+                        <span class="tech-tag">Portfolio Optimization</span>
+                        <span class="tech-tag">Market Analysis</span>
+                        <span class="tech-tag">Trading Strategies</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <p class="metric-value">123rd</p>
+                            <p class="metric-label">Global Rank</p>
+                        </div>
+                        <div class="metric">
+                            <p class="metric-value">Top 6.1%</p>
+                            <p class="metric-label">Percentile</p>
+                        </div>
+                        <div class="metric">
+                            <p class="metric-value">+12.36%</p>
+                            <p class="metric-label">Portfolio Return</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <p class="project-type">Machine Learning</p>
+                <h3 class="project-title">Cryptocurrency Price Prediction</h3>
+                <p class="project-description">Developed a Gradient Boosting Classifier in Python to forecast cryptocurrency prices. Employed feature engineering and data cleaning with NumPy and Pandas, and used partial dependence plots to improve model interpretability.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <p class="metric-value">0.78</p>
+                        <p class="metric-label">F1 Score</p>
+                    </div>
+                    <div class="metric">
+                        <p class="metric-value">GBC</p>
+                        <p class="metric-label">Algorithm</p>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card fade-in">
+                <p class="project-type">Teaching</p>
+                <h3 class="project-title">Cryptocurrencies TA</h3>
+                <p class="project-description">Teaching Assistant for FNCE-5720: Cryptocurrencies at UConn. Supported lectures on Bitcoin, Ethereum, stablecoins, and CBDCs. Helped students understand cryptocurrency fundamentals, risk analysis, and regulatory frameworks.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <p class="metric-value">Graduate</p>
+                        <p class="metric-label">Level Course</p>
+                    </div>
+                    <div class="metric">
+                        <p class="metric-value">2024-25</p>
+                        <p class="metric-label">Academic Year</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="section-header">
+            <p class="section-eyebrow">Capabilities</p>
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Programming</h3>
+                <ul class="skill-list">
+                    <li>Python (Pandas, NumPy)</li>
+                    <li>Java</li>
+                    <li>SQL</li>
+                    <li>R</li>
+                    <li>VBA</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Data & ML</h3>
+                <ul class="skill-list">
+                    <li>PyTorch / TensorFlow</li>
+                    <li>scikit-learn</li>
+                    <li>PySpark / HIVE</li>
+                    <li>MongoDB</li>
+                    <li>AWS / Cloudera</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Visualization</h3>
+                <ul class="skill-list">
+                    <li>Tableau</li>
+                    <li>Power BI</li>
+                    <li>Qlik</li>
+                    <li>Alteryx</li>
+                    <li>Excel / JMP / SAS</li>
+                </ul>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Finance</h3>
+                <ul class="skill-list">
+                    <li>Bloomberg Terminal</li>
+                    <li>Financial Modeling</li>
+                    <li>Options Strategies</li>
+                    <li>Technical Analysis</li>
+                    <li>Risk Management</li>
+                </ul>
+            </div>
+        </div>
+        <div class="certifications">
+            <h3 class="cert-title">Certifications</h3>
+            <div class="cert-list">
+                <div class="cert-item">Bloomberg Market Concepts</div>
+                <div class="cert-item">Future of Payment Technologies</div>
+                <div class="cert-item">Blockchain & Cryptocurrencies</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="section-header">
+            <p class="section-eyebrow">Background</p>
+            <h2 class="section-title">Education</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="education-grid">
+            <div class="education-card fade-in">
+                <p class="edu-year">Master's Degree</p>
+                <h3 class="edu-degree">M.S. Financial Technology</h3>
+                <p class="edu-school">University of Connecticut</p>
+                <p class="edu-location">Storrs, CT</p>
+                <p class="edu-details">Coursework: Financial Models, Foundations of FinTech, Predictive Modeling, FinTech Economics, Statistics Business Analytics, Blockchain & Cryptocurrencies, Data Science and Generative AI in Business</p>
+            </div>
+            <div class="education-card fade-in">
+                <p class="edu-year">Bachelor's Degree</p>
+                <h3 class="edu-degree">B.E. Electronics</h3>
+                <p class="edu-school">SRM University</p>
+                <p class="edu-location">Chennai, India</p>
+                <p class="edu-details">Foundation in engineering principles, systems thinking, and technical problem-solving that supports data-driven analysis and software development.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <p class="section-eyebrow">Connect</p>
+        <h2 class="section-title">Let's Discuss Opportunities</h2>
+        <p class="contact-subtitle">Interested in data science, investment analysis, quantitative finance, or FinTech roles.</p>
+        <div class="contact-links">
+            <a href="mailto:rahulyatagiri1@gmail.com" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                rahulyatagiri1@gmail.com
+            </a>
+            <a href="tel:8573981717" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                (857) 398-1717
+            </a>
+            <a href="https://linkedin.com/in/rahulyatagiri" class="contact-link" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                </svg>
+                LinkedIn
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">© 2025 Rahul Yatagiri</p>
+        <p class="footer-text">Data Science & FinTech Professional</p>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
