@@ -551,6 +551,165 @@
             letter-spacing: 0.05em;
         }
 
+        /* Ventures Section */
+        .ventures {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+        }
+
+        .ventures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .venture-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .venture-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .venture-card:hover {
+            border-color: var(--border-dark);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            transform: translateY(-4px);
+        }
+
+        .venture-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .venture-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .venture-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.75rem;
+            border: 1px solid var(--gold);
+        }
+
+        .venture-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s ease;
+        }
+
+        .venture-link:hover {
+            color: var(--gold);
+        }
+
+        .venture-status-live {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: #2e7d52;
+            letter-spacing: 0.05em;
+        }
+
+        .venture-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .venture-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .venture-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        .venture-stats {
+            display: flex;
+            gap: 2rem;
+            padding: 1.25rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .venture-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .venture-stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .venture-stat-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .venture-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .venture-cta {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.65rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.85rem;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: background 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .venture-cta:hover {
+            background: var(--accent-light);
+        }
+
+        @media (max-width: 1024px) {
+            .ventures-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Skills Section */
         .skills {
             background: var(--bg-card);
@@ -842,6 +1001,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#ventures">Ventures</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -1129,6 +1289,77 @@
                         <p class="metric-value">Live</p>
                         <p class="metric-label">POS Sync</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ventures" class="ventures">
+        <div class="section-header">
+            <p class="section-eyebrow">Built & Shipped</p>
+            <h2 class="section-title">Ventures</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="ventures-grid">
+            <div class="venture-card fade-in">
+                <div class="venture-header">
+                    <div class="venture-badge">AI Platform</div>
+                    <a href="https://www.refereeai.us" target="_blank" rel="noopener noreferrer" class="venture-link">refereeai.us ↗</a>
+                </div>
+                <h3 class="venture-title">RefereeAI</h3>
+                <p class="venture-tagline">Job intelligence. No middlemen.</p>
+                <p class="venture-description">A job intelligence platform that scrapes authentic job listings directly from company career pages — cutting out aggregators entirely. Built custom scrapers for Greenhouse, Workday, and Lever ATS platforms. Users receive real-time Discord notifications for new job matches with direct links to official application pages.</p>
+                <div class="venture-stats">
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">3,500+</span>
+                        <span class="venture-stat-label">Companies Indexed</span>
+                    </div>
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">3</span>
+                        <span class="venture-stat-label">ATS Platforms</span>
+                    </div>
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">Live</span>
+                        <span class="venture-stat-label">Status</span>
+                    </div>
+                </div>
+                <div class="venture-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Selenium</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Discord API</span>
+                    <span class="tech-tag">Web Scraping</span>
+                </div>
+                <a href="https://www.refereeai.us" target="_blank" rel="noopener noreferrer" class="venture-cta">Visit refereeai.us →</a>
+            </div>
+            <div class="venture-card fade-in">
+                <div class="venture-header">
+                    <div class="venture-badge">Voice AI</div>
+                    <span class="venture-status-live">● Live</span>
+                </div>
+                <h3 class="venture-title">MYTO</h3>
+                <p class="venture-tagline">Your restaurant's AI phone agent.</p>
+                <p class="venture-description">A production voice AI agent for restaurants that handles inbound phone calls, takes orders, and manages reservations around the clock. Integrates directly with POS systems for real-time menu updates and order processing. Built for sub-500ms latency and natural conversations that actually close orders.</p>
+                <div class="venture-stats">
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">24/7</span>
+                        <span class="venture-stat-label">Availability</span>
+                    </div>
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">&lt;500ms</span>
+                        <span class="venture-stat-label">Response Latency</span>
+                    </div>
+                    <div class="venture-stat">
+                        <span class="venture-stat-value">Live</span>
+                        <span class="venture-stat-label">POS Sync</span>
+                    </div>
+                </div>
+                <div class="venture-tech">
+                    <span class="tech-tag">VAPI</span>
+                    <span class="tech-tag">Twilio</span>
+                    <span class="tech-tag">Ultravox</span>
+                    <span class="tech-tag">Eleven Labs</span>
+                    <span class="tech-tag">Python</span>
                 </div>
             </div>
         </div>
